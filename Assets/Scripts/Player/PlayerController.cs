@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private float runAcceleration = 50f;
     [SerializeField]
     private float runSpeed = 4f;
+    private float verticalVelocity = 0f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float jumpForce = 5f;
 
     [Header("Camera setting")]
     [SerializeField]
@@ -39,12 +42,26 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraRightXZ = new Vector3(m_PlayerCamera.transform.right.x, 0f, m_PlayerCamera.transform.right.z).normalized;
         Vector3 movementDirection = cameraRightXZ * m_PlayerLocalInput.MovementInput.x + cameraForwardXZ * m_PlayerLocalInput.MovementInput.y;
 
-
         Vector3 horizontalVelocity = new Vector3(m_CharacterController.velocity.x, 0f, m_CharacterController.velocity.z);
         Vector3 targetVelocity = movementDirection * runSpeed;
         Vector3 smoothVelocity = Vector3.MoveTowards(horizontalVelocity, targetVelocity, runAcceleration * Time.deltaTime);
-        m_CharacterController.Move(smoothVelocity * Time.deltaTime);
 
+
+        if (m_CharacterController.isGrounded)
+        {
+            if (verticalVelocity < 0f)
+                verticalVelocity = -2f;
+
+        }
+        else
+        {
+            verticalVelocity += gravity * Time.deltaTime;
+        }
+
+        Vector3 finalMove = smoothVelocity;
+        finalMove.y = verticalVelocity;
+
+        m_CharacterController.Move(finalMove * Time.deltaTime);
     }
 
     private void FixedUpdate()

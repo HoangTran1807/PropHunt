@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: UpRightsMat
-    second: {fileID: 2100000, guid: 8d224630ef0ce1741ae8c45fa351c41c, type: 2}
+    second: {fileID: 2100000, guid: 685f369ecaf3ea7409e5b4ca84c2f455, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: shelf_1Mat
-    second: {fileID: 2100000, guid: c10ef8506a5313a48afc8c0a1a106587, type: 2}
+    second: {fileID: 2100000, guid: c143844fadef6f740a8d14d11a961330, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
